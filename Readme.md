@@ -29,6 +29,9 @@ To perform all actions (like voting and posting/creating new content), you need 
 ```
 await AndroidVerification.VerifyAccountAsync(jodelUser);
 //It seems like trying to verify with a fresh/unused ip address works better than a "used" one
+
+await InstanceIdVerification.VerifyAccountAsync(jodelUser);
+//uses new Firebase(?) method from the Jodel app, not sure if it is intended to verify accounts
 ```
 
 ----
