@@ -92,6 +92,40 @@ namespace JodelNet.GCM
                 account_id = (long)checkinResponseProto.androidId
             };
 
+            //lazy hack
+            var verificationResponse = await Task.Run(() => GetGcmVerificationCode(loginRequestProto));
+            if (!verificationResponse.Success)
+            {
+                return verificationResponse;
+            }
+
+            var verificationData = verificationResponse.ErrorMessage;
+
+            if (!verificationData.Contains("verification_code"))
+            {
+                return new AndroidVerificationResult(false, "MCS server didn't contain verification_code field.");
+            }
+            var serverTime = Regex.Match(verificationData, "\"server_time\":(.*?),").Groups[1].Value;
+            var verificationToken = Regex.Match(verificationData, "\"verification_code\":\"(.*?)\"").Groups[1].Value;
+            var verifiedPushToken =  await jodelUser.VerifyPushTokenAsync(serverTime, verificationToken);
+            return !verifiedPushToken ? new AndroidVerificationResult(false, "Couldn't verify c2dm token.") : new AndroidVerificationResult(true, "");
+        }
+
+        private static byte[] SerializeToByteArray<T>(T instance)
+        {
+            byte[] data;
+            using (var ms = new MemoryStream())
+            {
+                ProtoBuf.Serializer.Serialize(ms, instance);
+
+                data = ms.ToArray();
+            }
+
+            return data;
+        }
+
+        private static AndroidVerificationResult GetGcmVerificationCode(LoginRequest loginRequestProto)
+        {
 
             var loginRequestBytes = SerializeToByteArray(loginRequestProto);
 
@@ -107,6 +141,7 @@ namespace JodelNet.GCM
             //not async yet
             //no heartbeat implemented
             var verificationData = "";
+
             while (true)
             {
                 var read = inputStream.ReadProtoMessage();
@@ -139,27 +174,8 @@ namespace JodelNet.GCM
                 }
 
             }
-            if (!verificationData.Contains("verification_code"))
-            {
-                return new AndroidVerificationResult(false, "MCS server didn't contain verification_code field.");
-            }
-            var serverTime = Regex.Match(verificationData, "\"server_time\":(.*?),").Groups[1].Value;
-            var verificationToken = Regex.Match(verificationData, "\"verification_code\":\"(.*?)\"").Groups[1].Value;
-            var verifiedPushToken =  await jodelUser.VerifyPushTokenAsync(serverTime, verificationToken);
-            return !verifiedPushToken ? new AndroidVerificationResult(false, "Couldn't verify pushed c2dm token.") : new AndroidVerificationResult(true, "");
-        }
 
-        private static byte[] SerializeToByteArray<T>(T instance)
-        {
-            byte[] data;
-            using (var ms = new MemoryStream())
-            {
-                ProtoBuf.Serializer.Serialize(ms, instance);
-
-                data = ms.ToArray();
-            }
-
-            return data;
+            return new AndroidVerificationResult(true, verificationData);
         }
     }
 }

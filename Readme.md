@@ -28,6 +28,7 @@ await jodelUser.CreateAccountAsync();
 To perform all actions (like voting and posting/creating new content), you need to verify your account using Google Cloud Messaging (GCM)
 ```
 await AndroidVerification.VerifyAccountAsync(jodelUser);
+//It seems like trying to verify with a fresh/unused ip address works better than a "used" one
 ```
 
 ----

@@ -1,5 +1,6 @@
 ﻿using System.Net.Security;
 using JodelNet.GCM.Extensions;
+using JodelNet.GCM.Proto;
 
 namespace JodelNet.GCM.Stream
 {

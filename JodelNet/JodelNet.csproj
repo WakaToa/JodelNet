@@ -62,7 +62,7 @@
     <Compile Include="Extensions\Pair.cs" />
     <Compile Include="GCM\AndroidVerification.cs" />
     <Compile Include="GCM\AndroidVerificationResult.cs" />
-    <Compile Include="GCM\MCSToken.cs" />
+    <Compile Include="GCM\Proto\MCSToken.cs" />
     <Compile Include="GCM\Extensions\SslStreamExtensions.cs" />
     <Compile Include="GCM\Proto\CheckinPB2.cs" />
     <Compile Include="GCM\Proto\MCSPB2.cs" />
