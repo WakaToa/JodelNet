@@ -61,7 +61,8 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Extensions\Pair.cs" />
     <Compile Include="GCM\AndroidVerification.cs" />
-    <Compile Include="GCM\AndroidVerificationResult.cs" />
+    <Compile Include="GCM\VerificationResult.cs" />
+    <Compile Include="GCM\InstanceIdVerification.cs" />
     <Compile Include="GCM\Proto\MCSToken.cs" />
     <Compile Include="GCM\Extensions\SslStreamExtensions.cs" />
     <Compile Include="GCM\Proto\CheckinPB2.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="Json\RequestModels\PushTokenJson.cs" />
     <Compile Include="Json\RequestModels\RefreshAccessTokenJson.cs" />
     <Compile Include="Json\RequestModels\SetLocationJson.cs" />
+    <Compile Include="Json\RequestModels\VerifyInstanceIdRequest.cs" />
     <Compile Include="Json\RequestModels\VerifyPushTokenJson.cs" />
     <Compile Include="Json\Requests\IJodelRequest.cs" />
     <Compile Include="Json\Requests\JodelRequestBase.cs" />
@@ -99,6 +101,7 @@
     <Compile Include="Json\Responses\JodelPost.cs" />
     <Compile Include="Json\Responses\JodelResponse.cs" />
     <Compile Include="Json\Responses\GetUserStatsResponse.cs" />
+    <Compile Include="Json\Responses\VerifyInstanceIdResponse.cs" />
     <Compile Include="Json\Responses\VotePostResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

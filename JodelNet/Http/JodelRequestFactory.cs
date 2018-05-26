@@ -73,6 +73,20 @@ namespace JodelNet.Http
                 return _verifyPushTokenRequestFactory;
             }
         }
+
+        private Func<IJodelRequest<VerifyInstanceIdResponse>> _verifyInstanceIdRequestFactory;
+        public Func<IJodelRequest<VerifyInstanceIdResponse>> VerifyInstanceIdRequestFactory
+        {
+            get
+            {
+                if (_verifyInstanceIdRequestFactory == null)
+                {
+                    var request = new SimplifiedRequest<VerifyInstanceIdResponse>(User, HttpMethod.Post, "/user/verification/iid", "v3");
+                    _verifyInstanceIdRequestFactory = (_verifyInstanceIdRequestFactory = () => request);
+                }
+                return _verifyInstanceIdRequestFactory;
+            }
+        }
         #endregion
 
         #region Get posts by location

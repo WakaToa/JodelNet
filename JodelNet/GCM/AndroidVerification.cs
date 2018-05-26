@@ -29,7 +29,7 @@ namespace JodelNet.GCM
         }
 
         //todo: not 100% async yet
-        public static async Task<AndroidVerificationResult> VerifyAccountAsync(JodelUser jodelUser)
+        public static async Task<VerificationResult> VerifyAccountAsync(JodelUser jodelUser)
         {
             var checkinRequestProto = new CheckinRequest
             {
@@ -54,7 +54,7 @@ namespace JodelNet.GCM
             }
             catch (Exception)
             {
-                return new AndroidVerificationResult(false, "Couldn't deserialize CheckinProtoResponse.");
+                return new VerificationResult(false, "Couldn't deserialize CheckinProtoResponse.");
             }
 
             var registerPostData = "app=com.tellm.android.app&app_ver=1001800&cert=a4a8d4d7b09736a0f65596a868cc6fd620920fb0&device=" + checkinResponseProto.androidId + "&sender=425112442765&X-appid=" + Guid.NewGuid().ToString("n").Substring(0, 11) + "&X-scope=GCM";
@@ -70,14 +70,14 @@ namespace JodelNet.GCM
 
             if (!registerTokenResponseString.Contains("token"))
             {
-                return new AndroidVerificationResult(false, "Couldn't register c2dm token.");
+                return new VerificationResult(false, "Couldn't register c2dm token.");
             }
             var registerToken = registerTokenResponseString.Replace("token=", "");
 
             var tokenPushed = await jodelUser.PushTokenAsync(registerToken);
             if (!tokenPushed)
             {
-                return new AndroidVerificationResult(false, "Couldn't push c2dm token.");
+                return new VerificationResult(false, "Couldn't push c2dm token.");
             }
             var loginRequestProto = new LoginRequest
             {
@@ -99,16 +99,16 @@ namespace JodelNet.GCM
                 return verificationResponse;
             }
 
-            var verificationData = verificationResponse.ErrorMessage;
+            var verificationData = verificationResponse.Message;
 
             if (!verificationData.Contains("verification_code"))
             {
-                return new AndroidVerificationResult(false, "MCS server didn't contain verification_code field.");
+                return new VerificationResult(false, "MCS server didn't contain verification_code field.");
             }
             var serverTime = Regex.Match(verificationData, "\"server_time\":(.*?),").Groups[1].Value;
             var verificationToken = Regex.Match(verificationData, "\"verification_code\":\"(.*?)\"").Groups[1].Value;
             var verifiedPushToken =  await jodelUser.VerifyPushTokenAsync(serverTime, verificationToken);
-            return !verifiedPushToken ? new AndroidVerificationResult(false, "Couldn't verify c2dm token.") : new AndroidVerificationResult(true, "");
+            return !verifiedPushToken ? new VerificationResult(false, "Couldn't verify c2dm token.") : new VerificationResult(true, "");
         }
 
         private static byte[] SerializeToByteArray<T>(T instance)
@@ -124,7 +124,7 @@ namespace JodelNet.GCM
             return data;
         }
 
-        private static AndroidVerificationResult GetGcmVerificationCode(LoginRequest loginRequestProto)
+        private static VerificationResult GetGcmVerificationCode(LoginRequest loginRequestProto)
         {
 
             var loginRequestBytes = SerializeToByteArray(loginRequestProto);
@@ -153,7 +153,7 @@ namespace JodelNet.GCM
                     {
                         var error = Encoding.Default.GetString(loginResponse.error.extension.data);
                         client.Close();
-                        return new AndroidVerificationResult(false, "MCSError: " + error);
+                        return new VerificationResult(false, "MCSError: " + error);
                     }
                 }
                 if (read.McsTag == MCSToken.MCS_DATA_MESSAGE_STANZA_TAG)
@@ -170,12 +170,12 @@ namespace JodelNet.GCM
                 if (read.McsTag == MCSToken.MCS_CLOSE_TAG)
                 {
                     client.Close();
-                    return new AndroidVerificationResult(false, "MCS server closed connection before retrieving verification data.");
+                    return new VerificationResult(false, "MCS server closed connection before retrieving verification data.");
                 }
 
             }
 
-            return new AndroidVerificationResult(true, verificationData);
+            return new VerificationResult(true, verificationData);
         }
     }
 }

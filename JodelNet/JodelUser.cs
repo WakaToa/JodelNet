@@ -99,6 +99,11 @@ namespace JodelNet
         {
             return await RequestFactory.VerifyPushTokenRequestFactory().PerformActionAsync(null, new VerifyPushTokenJson() { ServerTime = serverTime, VerificationCode = verificationCode });
         }
+
+        public async Task<VerifyInstanceIdResponse> VerifyInstanceIdAsync(string instanceId)
+        {
+            return await RequestFactory.VerifyInstanceIdRequestFactory().PerformActionAsync(null, new VerifyInstanceIdRequest() { InstanceId = instanceId});
+        }
         #endregion
 
         #region Get posts by location
