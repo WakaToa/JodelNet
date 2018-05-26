@@ -4,10 +4,10 @@ using System.Linq;
 using System.Media;
 using System.Threading.Tasks;
 using JodelNet.Extensions;
-using JodelNet.GCM;
 using JodelNet.Http;
 using JodelNet.Json.RequestModels;
 using JodelNet.Json.Responses;
+using JodelNet.Verification;
 
 namespace JodelNet
 {

@@ -8,10 +8,10 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using JodelNet.GCM.Proto;
-using JodelNet.GCM.Stream;
+using JodelNet.Verification.Proto;
+using JodelNet.Verification.Stream;
 
-namespace JodelNet.GCM
+namespace JodelNet.Verification
 {
     //https://github.com/microg/android_packages_apps_GmsCore/blob/93c3cbb31be6c8ffae81c18e551cb00c74aaaaf4/play-services-core/src/main/java/org/microg/gms/gcm/mcs/McsService.java
     //https://github.com/nborrmann/gcmreverse

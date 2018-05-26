@@ -1,4 +1,4 @@
-﻿namespace JodelNet.GCM.Proto
+﻿namespace JodelNet.Verification.Proto
 {
     //https://github.com/microg/android_packages_apps_GmsCore/blob/93c3cbb31be6c8ffae81c18e551cb00c74aaaaf4/play-services-core/src/main/java/org/microg/gms/gcm/mcs/Constants.java
     public enum MCSToken

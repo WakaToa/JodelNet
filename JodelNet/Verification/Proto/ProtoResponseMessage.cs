@@ -1,4 +1,4 @@
-﻿namespace JodelNet.GCM.Proto
+﻿namespace JodelNet.Verification.Proto
 {
     public class ProtoResponseMessage
     {

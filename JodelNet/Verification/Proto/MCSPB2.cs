@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 
 // Generated from: mcs.proto
-namespace JodelNet.GCM.Proto
+namespace JodelNet.Verification.Proto
 {
     [global::System.Serializable, global::ProtoBuf.ProtoContract(Name = @"HeartbeatPing")]
     public partial class HeartbeatPing : global::ProtoBuf.IExtensible

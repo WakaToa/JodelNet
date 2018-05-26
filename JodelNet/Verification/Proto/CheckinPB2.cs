@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 
 // Generated from: checkin.proto
-namespace JodelNet.GCM.Proto
+namespace JodelNet.Verification.Proto
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CheckinRequest")]
   public partial class CheckinRequest : global::ProtoBuf.IExtensible

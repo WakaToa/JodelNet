@@ -1,8 +1,8 @@
 ﻿using System.Net.Security;
-using JodelNet.GCM.Extensions;
-using JodelNet.GCM.Proto;
+using JodelNet.Verification.Extensions;
+using JodelNet.Verification.Proto;
 
-namespace JodelNet.GCM.Stream
+namespace JodelNet.Verification.Stream
 {
     //https://github.com/microg/android_packages_apps_GmsCore/blob/93c3cbb31be6c8ffae81c18e551cb00c74aaaaf4/play-services-core/src/main/java/org/microg/gms/gcm/mcs/McsOutputStream.java
     public class McsOutputStream

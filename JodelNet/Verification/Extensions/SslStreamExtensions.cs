@@ -1,6 +1,6 @@
 ﻿using System.Net.Security;
 
-namespace JodelNet.GCM.Extensions
+namespace JodelNet.Verification.Extensions
 {
     public static class SslStreamExtensions
     {

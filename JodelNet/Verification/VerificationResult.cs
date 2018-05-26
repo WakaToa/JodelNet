@@ -1,4 +1,4 @@
-﻿namespace JodelNet.GCM
+﻿namespace JodelNet.Verification
 {
     public class VerificationResult
     {
