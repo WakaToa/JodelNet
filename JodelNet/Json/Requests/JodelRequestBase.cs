@@ -92,11 +92,11 @@ namespace JodelNet.Json.Requests
 #pragma warning disable CS0168
                 catch (JsonSerializationException e)
                 {
-                    deserializedObject = new T {Code = JodelResponseCodes.JSON_ERROR};
+                    deserializedObject = new T {ResponseCode = JodelResponseCodes.JSON_ERROR};
                 }
 #pragma warning restore CS0168
             }
-            return deserializedObject ?? (new T {Code = JodelResponseCodes.NULL_RESPONSE_ERROR});
+            return deserializedObject ?? (new T {ResponseCode = JodelResponseCodes.NULL_RESPONSE_ERROR});
         }
 
         protected static async Task<T> Deserialize<T>(HttpResponseMessage message) where T : JodelResponse, new()
@@ -104,19 +104,19 @@ namespace JodelNet.Json.Requests
             switch ((int)message.StatusCode)
             {
                 case 401:
-                    return new T(){Code = JodelResponseCodes.UNAUTHORIZED};
+                    return new T(){ResponseCode = JodelResponseCodes.UNAUTHORIZED};
                 case 402:
-                    return new T() { Code = JodelResponseCodes.ACTION_NOT_ALLOWED };
+                    return new T() { ResponseCode = JodelResponseCodes.ACTION_NOT_ALLOWED };
                 case 403:
-                    return new T() { Code = JodelResponseCodes.ACCESS_DENIED };
+                    return new T() { ResponseCode = JodelResponseCodes.ACCESS_DENIED };
                 case 429:
-                    return new T() { Code = JodelResponseCodes.TOO_MANY_REQUESTS };
+                    return new T() { ResponseCode = JodelResponseCodes.TOO_MANY_REQUESTS };
                 case 477:
-                    return new T() { Code = JodelResponseCodes.SIGNED_REQUEST_EXPECTED };
+                    return new T() { ResponseCode = JodelResponseCodes.SIGNED_REQUEST_EXPECTED };
                 case 478:
-                    return new T() { Code = JodelResponseCodes.ACCOUNT_NOT_VERIFIED };
+                    return new T() { ResponseCode = JodelResponseCodes.ACCOUNT_NOT_VERIFIED };
                 case 502:
-                    return new T() { Code = JodelResponseCodes.BAD_GATEWAY };
+                    return new T() { ResponseCode = JodelResponseCodes.BAD_GATEWAY };
             }
             var messageContent = await message.Content.ReadAsStringAsync().ConfigureAwait(false);
 

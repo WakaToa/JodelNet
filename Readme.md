@@ -71,6 +71,7 @@ SetLocationAsync();
 SetHomeTownAsync();
 DeleteUserHomeAsync();
 GetUserConfigAsync();
+GetUserStatsAsync();
 
 //Post interaction (verified account needed)
 CreatePostAsync();
@@ -85,6 +86,10 @@ GetSharePostUrlAsync();
 GetRecommendedChannelsAsync();
 FollowChannelAsync();
 FollowChannelsAsync();
+
+#Referrer
+GetUserInviteCode();
+PostInviteComplete();
 ```
 
 ----

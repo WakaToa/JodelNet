@@ -4,14 +4,14 @@
     {
         protected JodelResponse()
         {
-            Code = JodelResponseCodes.SUCCESS;
+            ResponseCode = JodelResponseCodes.SUCCESS;
         }
 
-        public JodelResponseCodes Code { get; set; }
+        public JodelResponseCodes ResponseCode { get; set; }
 
-        public string ErrorMessage => Code.ToString();
+        public string ErrorMessage => ResponseCode.ToString();
 
-        public bool Success => Code == JodelResponseCodes.SUCCESS;
+        public bool Success => ResponseCode == JodelResponseCodes.SUCCESS;
     }
 
     public enum JodelResponseCodes

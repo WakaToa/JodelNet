@@ -22,7 +22,7 @@ namespace JodelNet.Http
             {
                 if (_createAccountRequestFactory == null)
                 {
-                    var request = new CreateAccountRequest(User, HttpMethod.Post, "/users/", "v2", "");
+                    var request = new SimplifiedRequest<CreateAccountResponse>(User, HttpMethod.Post, "/users/", "v2", "");
                     _createAccountRequestFactory = (_createAccountRequestFactory = () => request);
                     return _createAccountRequestFactory;
                 }
@@ -37,7 +37,7 @@ namespace JodelNet.Http
             {
                 if (_refreshAccessTokenRequestFactory == null)
                 {
-                    var request = new RefreshAccessTokenRequest(User, HttpMethod.Post, "/users/refreshToken");
+                    var request = new SimplifiedRequest<CreateAccountResponse>(User, HttpMethod.Post, "/users/refreshToken");
                     _refreshAccessTokenRequestFactory = (_refreshAccessTokenRequestFactory = () => request);
                 }
                 return _refreshAccessTokenRequestFactory;
@@ -83,7 +83,7 @@ namespace JodelNet.Http
             {
                 if (_getPostsPopularRequestFactory == null)
                 {
-                    var request = new GetPostsRequest(User, HttpMethod.Get, "/posts/location/popular"); //channel/popular
+                    var request = new SimplifiedRequest<GetPostsResponse>(User, HttpMethod.Get, "/posts/location/popular"); //channel/popular
                     _getPostsPopularRequestFactory = (_getPostsPopularRequestFactory = () => request);
                 }
                 return _getPostsPopularRequestFactory;
@@ -97,7 +97,7 @@ namespace JodelNet.Http
             {
                 if (_getPostsRecentRequestFactory == null)
                 {
-                    var request = new GetPostsRequest(User, HttpMethod.Get, "/posts/location/");
+                    var request = new SimplifiedRequest<GetPostsResponse>(User, HttpMethod.Get, "/posts/location/");
                     _getPostsRecentRequestFactory = (_getPostsRecentRequestFactory = () => request);
                 }
                 return _getPostsRecentRequestFactory;
@@ -111,7 +111,7 @@ namespace JodelNet.Http
             {
                 if (_getPostsDiscussedRequestFactory == null)
                 {
-                    var request = new GetPostsRequest(User, HttpMethod.Get, "/posts/location/discussed");
+                    var request = new SimplifiedRequest<GetPostsResponse>(User, HttpMethod.Get, "/posts/location/discussed");
                     _getPostsDiscussedRequestFactory = (_getPostsDiscussedRequestFactory = () => request);
                 }
                 return _getPostsDiscussedRequestFactory;
@@ -125,7 +125,7 @@ namespace JodelNet.Http
             {
                 if (_getPostsCombinedRequestFactory == null)
                 {
-                    var request = new GetPostsCombinedRequest(User, HttpMethod.Get, "/posts/location/combo", "v3");
+                    var request = new SimplifiedRequest<GetPostsCombinedResponse>(User, HttpMethod.Get, "/posts/location/combo", "v3");
                     _getPostsCombinedRequestFactory = (_getPostsCombinedRequestFactory = () => request);
                 }
                 return _getPostsCombinedRequestFactory;
@@ -141,7 +141,7 @@ namespace JodelNet.Http
             {
                 if (_getPostsChannelPopularRequestFactory == null)
                 {
-                    var request = new GetPostsRequest(User, HttpMethod.Get, "/posts/channel/popular", "v3");
+                    var request = new SimplifiedRequest<GetPostsResponse>(User, HttpMethod.Get, "/posts/channel/popular", "v3");
                     _getPostsChannelPopularRequestFactory = (_getPostsChannelPopularRequestFactory = () => request);
                 }
                 return _getPostsChannelPopularRequestFactory;
@@ -155,7 +155,7 @@ namespace JodelNet.Http
             {
                 if (_getPostsChannelRecentRequestFactory == null)
                 {
-                    var request = new GetPostsRequest(User, HttpMethod.Get, "/posts/channel/", "v3");
+                    var request = new SimplifiedRequest<GetPostsResponse>(User, HttpMethod.Get, "/posts/channel/", "v3");
                     _getPostsChannelRecentRequestFactory = (_getPostsChannelRecentRequestFactory = () => request);
                 }
                 return _getPostsChannelRecentRequestFactory;
@@ -169,7 +169,7 @@ namespace JodelNet.Http
             {
                 if (_getPostsChannelDiscussedRequestFactory == null)
                 {
-                    var request = new GetPostsRequest(User, HttpMethod.Get, "/posts/channel/discussed", "v3");
+                    var request = new SimplifiedRequest<GetPostsResponse>(User, HttpMethod.Get, "/posts/channel/discussed", "v3");
                     _getPostsChannelDiscussedRequestFactory = (_getPostsChannelDiscussedRequestFactory = () => request);
                 }
                 return _getPostsChannelDiscussedRequestFactory;
@@ -183,7 +183,7 @@ namespace JodelNet.Http
             {
                 if (_getPostsChannelCombinedRequestFactory == null)
                 {
-                    var request = new GetPostsCombinedRequest(User, HttpMethod.Get, "/posts/channel/combo", "v3");
+                    var request = new SimplifiedRequest<GetPostsCombinedResponse>(User, HttpMethod.Get, "/posts/channel/combo", "v3");
                     _getPostsChannelCombinedRequestFactory = (_getPostsChannelCombinedRequestFactory = () => request);
                 }
                 return _getPostsChannelCombinedRequestFactory;
@@ -199,7 +199,7 @@ namespace JodelNet.Http
             {
                 if (_getPostsHashtagPopularRequestFactory == null)
                 {
-                    var request = new GetPostsRequest(User, HttpMethod.Get, "/posts/hashtag/popular", "v3");
+                    var request = new SimplifiedRequest<GetPostsResponse>(User, HttpMethod.Get, "/posts/hashtag/popular", "v3");
                     _getPostsHashtagPopularRequestFactory = (_getPostsChannelPopularRequestFactory = () => request);
                 }
                 return _getPostsHashtagPopularRequestFactory;
@@ -213,7 +213,7 @@ namespace JodelNet.Http
             {
                 if (_getPostsHashtagRecentRequestFactory == null)
                 {
-                    var request = new GetPostsRequest(User, HttpMethod.Get, "/posts/hashtag/", "v3");
+                    var request = new SimplifiedRequest<GetPostsResponse>(User, HttpMethod.Get, "/posts/hashtag/", "v3");
                     _getPostsHashtagRecentRequestFactory = (_getPostsHashtagRecentRequestFactory = () => request);
                 }
                 return _getPostsHashtagRecentRequestFactory;
@@ -227,7 +227,7 @@ namespace JodelNet.Http
             {
                 if (_getPostsHashtagDiscussedRequestFactory == null)
                 {
-                    var request = new GetPostsRequest(User, HttpMethod.Get, "/posts/hashtag/discussed", "v3");
+                    var request = new SimplifiedRequest<GetPostsResponse>(User, HttpMethod.Get, "/posts/hashtag/discussed", "v3");
                     _getPostsHashtagDiscussedRequestFactory = (_getPostsHashtagDiscussedRequestFactory = () => request);
                 }
                 return _getPostsHashtagDiscussedRequestFactory;
@@ -241,7 +241,7 @@ namespace JodelNet.Http
             {
                 if (_getPostsHashtagCombinedRequestFactory == null)
                 {
-                    var request = new GetPostsCombinedRequest(User, HttpMethod.Get, "/posts/hashtag/combo", "v3");
+                    var request = new SimplifiedRequest<GetPostsCombinedResponse>(User, HttpMethod.Get, "/posts/hashtag/combo", "v3");
                     _getPostsHashtagCombinedRequestFactory = (_getPostsHashtagCombinedRequestFactory = () => request);
                 }
                 return _getPostsHashtagCombinedRequestFactory;
@@ -257,7 +257,7 @@ namespace JodelNet.Http
             {
                 if (_getPostsOwnPopularRequestFactory == null)
                 {
-                    var request = new GetPostsRequest(User, HttpMethod.Get, "/posts/mine/popular/", "v2");
+                    var request = new SimplifiedRequest<GetPostsResponse>(User, HttpMethod.Get, "/posts/mine/popular/", "v2");
                     _getPostsOwnPopularRequestFactory = (_getPostsOwnPopularRequestFactory = () => request);
                 }
                 return _getPostsOwnPopularRequestFactory;
@@ -271,7 +271,7 @@ namespace JodelNet.Http
             {
                 if (_getPostsOwnRequestFactory == null)
                 {
-                    var request = new GetPostsRequest(User, HttpMethod.Get, "/posts/mine/", "v2");
+                    var request = new SimplifiedRequest<GetPostsResponse>(User, HttpMethod.Get, "/posts/mine/", "v2");
                     _getPostsOwnRequestFactory = (_getPostsOwnRequestFactory = () => request);
                 }
                 return _getPostsOwnRequestFactory;
@@ -285,7 +285,7 @@ namespace JodelNet.Http
             {
                 if (_getPostsOwnDiscussedRequestFactory == null)
                 {
-                    var request = new GetPostsRequest(User, HttpMethod.Get, "/posts/mine/discussed", "v2");
+                    var request = new SimplifiedRequest<GetPostsResponse>(User, HttpMethod.Get, "/posts/mine/discussed", "v2");
                     _getPostsOwnDiscussedRequestFactory = (_getPostsOwnDiscussedRequestFactory = () => request);
                 }
                 return _getPostsOwnDiscussedRequestFactory;
@@ -299,7 +299,7 @@ namespace JodelNet.Http
             {
                 if (_getPostsOwnCombinedRequestFactory == null)
                 {
-                    var request = new GetPostsCombinedRequest(User, HttpMethod.Get, "/posts/mine/combo", "v2");
+                    var request = new SimplifiedRequest<GetPostsCombinedResponse>(User, HttpMethod.Get, "/posts/mine/combo", "v2");
                     _getPostsOwnCombinedRequestFactory = (_getPostsOwnCombinedRequestFactory = () => request);
                 }
                 return _getPostsOwnCombinedRequestFactory;
@@ -343,7 +343,7 @@ namespace JodelNet.Http
             {
                 if (_getUserConfigRequestFactory == null)
                 {
-                    var request = new GetUserConfigRequest(User, HttpMethod.Get, "/user/config", "v3");
+                    var request = new SimplifiedRequest<GetUserConfigResponse>(User, HttpMethod.Get, "/user/config", "v3");
                     _getUserConfigRequestFactory = (_getUserConfigRequestFactory = () => request);
                 }
                 return _getUserConfigRequestFactory;
@@ -363,6 +363,20 @@ namespace JodelNet.Http
                 return _deleteUserHomeRequestFactory;
             }
         }
+
+        private Func<IJodelRequest<GetUserStatsResponse>> _getUserStatsRequestFactory;
+        public Func<IJodelRequest<GetUserStatsResponse>> GetUserStatsRequestFactory
+        {
+            get
+            {
+                if (_getUserStatsRequestFactory == null)
+                {
+                    var request = new SimplifiedRequest<GetUserStatsResponse>(User, HttpMethod.Get, "/user/stats", "v3");
+                    _getUserStatsRequestFactory = (_getUserStatsRequestFactory = () => request);
+                }
+                return _getUserStatsRequestFactory;
+            }
+        }
         #endregion
 
         #region Post interactions
@@ -373,7 +387,7 @@ namespace JodelNet.Http
             {
                 if (_createPostRequestFactory == null)
                 {
-                    var request = new CreatePostRequest(User, HttpMethod.Post, "/posts/", "v3");
+                    var request = new SimplifiedRequest<CreatePostResponse>(User, HttpMethod.Post, "/posts/", "v3");
                     _createPostRequestFactory = (_createPostRequestFactory = () => request);
                 }
                 return _createPostRequestFactory;
@@ -401,7 +415,7 @@ namespace JodelNet.Http
             {
                 if (_votePostRequestFactory == null)
                 {
-                    var request = new VotePostRequest(User, HttpMethod.Put, "/posts/", "v2");
+                    var request = new SimplifiedRequest<VotePostResponse>(User, HttpMethod.Put, "/posts/", "v2");
                     _votePostRequestFactory = (_votePostRequestFactory = () => request);
                 }
                 return _votePostRequestFactory;
@@ -429,7 +443,7 @@ namespace JodelNet.Http
             {
                 if (_getPostDetailsRequestFactory == null)
                 {
-                    var request = new GetPostDetailsRequest(User, HttpMethod.Get, "/posts/", "v3");
+                    var request = new SimplifiedRequest<GetPostDetailsResponse>(User, HttpMethod.Get, "/posts/", "v3");
                     _getPostDetailsRequestFactory = (_getPostDetailsRequestFactory = () => request);
                 }
                 return _getPostDetailsRequestFactory;
@@ -443,7 +457,7 @@ namespace JodelNet.Http
             {
                 if (_getSharePostUrlRequestFactory == null)
                 {
-                    var request = new GetSharePostUrlRequest(User, HttpMethod.Post, "/posts/", "v3");
+                    var request = new SimplifiedRequest<GetSharePostUrlResponse>(User, HttpMethod.Post, "/posts/", "v3");
                     _getSharePostUrlRequestFactory = (_getSharePostUrlRequestFactory = () => request);
                 }
                 return _getSharePostUrlRequestFactory;
@@ -460,7 +474,7 @@ namespace JodelNet.Http
             {
                 if (_getRecommendedChannelsRequestFactory == null)
                 {
-                    var request = new GetRecommendedChannelsRequest(User, HttpMethod.Get, "/user/recommendedChannels");
+                    var request = new SimplifiedRequest<GetRecommendedChannelsResponse>(User, HttpMethod.Get, "/user/recommendedChannels", "v3");
                     _getRecommendedChannelsRequestFactory = (_getRecommendedChannelsRequestFactory = () => request);
                 }
                 return _getRecommendedChannelsRequestFactory;
@@ -508,6 +522,37 @@ namespace JodelNet.Http
                 return _unfollowChannelsRequestFactory;
             }
         }
+        #endregion
+
+        #region Referer
+        private Func<IJodelRequest<GetUserInviteCodeResponse>> _getUserInviteCode;
+        public Func<IJodelRequest<GetUserInviteCodeResponse>> GetUserInviteCode
+        {
+            get
+            {
+                if (_getUserInviteCode == null)
+                {
+                    var request = new SimplifiedRequest<GetUserInviteCodeResponse>(User, HttpMethod.Post, "/user/invite", "v3");
+                    _getUserInviteCode = (_getUserInviteCode = () => request);
+                }
+                return _getUserInviteCode;
+            }
+        }
+
+        private Func<IJodelRequest<bool>> _postInviteComplete;
+        public Func<IJodelRequest<bool>> PostInviteComplete
+        {
+            get
+            {
+                if (_postInviteComplete == null)
+                {
+                    var request = new SimplifiedBoolRequest(User, HttpMethod.Post, "/user/invite/complete", "v3");
+                    _postInviteComplete = (_postInviteComplete = () => request);
+                }
+                return _postInviteComplete;
+            }
+        }
+
         #endregion
 
     }

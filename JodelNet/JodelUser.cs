@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Threading.Tasks;
 using JodelNet.Extensions;
 using JodelNet.GCM;
@@ -419,6 +420,11 @@ namespace JodelNet
         {
             return await RequestFactory.GetUserConfigRequestFactory().PerformActionAsync();
         }
+
+        public async Task<GetUserStatsResponse> GetUserStatsAsync()
+        {
+            return await RequestFactory.GetUserStatsRequestFactory().PerformActionAsync();
+        }
         #endregion
 
         #region Post interaction
@@ -515,6 +521,27 @@ namespace JodelNet
             var result = await RequestFactory.FollowChannelsRequestFactory().PerformActionAsync(null, req);
             return result;
         }
+        #endregion
+
+        #region Referrer
+
+        public async Task<GetUserInviteCodeResponse> GetUserInviteCode()
+        {
+            return await RequestFactory.GetUserInviteCode().PerformActionAsync();
+        }
+
+        public async Task<bool> PostInviteComplete(string code)
+        {
+            var obj = new PostInviteCompleteJson
+            {
+                Post = code,
+                Referrer = code,
+                Source = code
+            };
+
+            return await RequestFactory.PostInviteComplete().PerformActionAsync(payload: obj);
+        }
+
         #endregion
 
     }
