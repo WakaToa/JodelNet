@@ -57,8 +57,7 @@ namespace JodelNet.GCM
                 return new AndroidVerificationResult(false, "Couldn't deserialize CheckinProtoResponse.");
             }
 
-
-            var json = "app=com.tellm.android.app&app_ver=1001800&cert=a4a8d4d7b09736a0f65596a868cc6fd620920fb0&device=" + checkinResponseProto.androidId + "&sender=425112442765&X-appid=" + Guid.NewGuid().ToString("n").Substring(0, 11) + "&X-scope=GCM";
+            var registerPostData = "app=com.tellm.android.app&app_ver=1001800&cert=a4a8d4d7b09736a0f65596a868cc6fd620920fb0&device=" + checkinResponseProto.androidId + "&sender=425112442765&X-appid=" + Guid.NewGuid().ToString("n").Substring(0, 11) + "&X-scope=GCM";
 
             webClient.Headers.Clear();
             webClient.Headers.Add("Authorization", "AidLogin " + checkinResponseProto.androidId + ":" + checkinResponseProto.securityToken);
@@ -67,7 +66,7 @@ namespace JodelNet.GCM
             webClient.Headers.Add("User-Agent", "Android-Checkin/2.0 (vbox86p JLS36G); deflate");
             webClient.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
 
-            var registerTokenResponseString = await webClient.UploadStringTaskAsync("https://android.clients.google.com/c2dm/register3", json);
+            var registerTokenResponseString = await webClient.UploadStringTaskAsync("https://android.clients.google.com/c2dm/register3", registerPostData);
 
             if (!registerTokenResponseString.Contains("token"))
             {

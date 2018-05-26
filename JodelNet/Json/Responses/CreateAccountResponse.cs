@@ -1,13 +1,44 @@
-﻿namespace JodelNet.Json.Responses
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
+
+namespace JodelNet.Json.Responses
 {
     public class CreateAccountResponse : JodelResponse
     {
-        public string access_token { get; set; }
-        public string refresh_token { get; set; }
-        public string token_type { get; set; }
-        public int expires_in { get; set; }
-        public int expiration_date { get; set; }
-        public string distinct_id { get; set; }
-        public bool returning { get; set; }
+        [JsonProperty("access_token")]
+        public string AccessToken { get; set; }
+
+        [JsonProperty("refresh_token")]
+        public string RefreshToken { get; set; }
+
+        [JsonProperty("token_type")]
+        public string TokenType { get; set; }
+
+        [JsonProperty("expires_in")]
+        public long ExpiresIn { get; set; }
+
+        [JsonProperty("expiration_date")]
+        public long ExpirationDate { get; set; }
+
+        [JsonProperty("distinct_id")]
+        public string DistinctId { get; set; }
+
+        [JsonProperty("returning")]
+        public bool Returning { get; set; }
+
+        [JsonProperty("experiments")]
+        public List<Experiment> Experiments { get; set; }
+
+        public class Experiment
+        {
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            [JsonProperty("group")]
+            public string Group { get; set; }
+
+            [JsonProperty("features")]
+            public List<string> Features { get; set; }
+        }
     }
 }

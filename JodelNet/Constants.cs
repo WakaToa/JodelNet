@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Net;
 
 namespace JodelNet
 {
@@ -13,6 +14,7 @@ namespace JodelNet
 
         public static WebHeaderCollection WebHeaders = new WebHeaderCollection()
         {
+            {"Accept", "*/*"},
             {"Accept-Encoding", "gzip"},
             {"User-Agent", "Jodel/" + VERSION + " Dalvik/2.1.0 (Linux; U; Android 6.0.1; E6653 Build/32.2.A.0.305)"},
             {"X-Client-Type", "android_" + VERSION},
@@ -23,5 +25,29 @@ namespace JodelNet
         {
             {"Content-Type", "application/json; charset=UTF-8"}
         };
+
+        public enum PostColor
+        {
+            Orange = 0xFF9908,
+            Yellow = 0xFFBA00,
+            Red = 0xDD5F5F,
+            Blue = 0x06A3CB,
+            Bluegreyish = 0x8ABDB0,
+            Green = 0x9EC41C,
+            Random
+        }
+
+        public static Dictionary<PostColor, string> Colors = new Dictionary<PostColor, string>
+        {
+            { PostColor.Red, "DD5F5F" },
+            { PostColor.Orange, "FF9908" },
+            { PostColor.Yellow, "FFBA00" },
+            { PostColor.Blue, "DD5F5F" },
+            { PostColor.Bluegreyish, "8ABDB0" },
+            { PostColor.Green, "9EC41C" },
+            { PostColor.Random, "FFFFFF" }
+        };
+
+        public static string GetColor(PostColor color) => Colors[color];
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace JodelNet.Json.Models
+﻿namespace JodelNet.Json.RequestModels
 {
     public abstract class JodelRequest
     {

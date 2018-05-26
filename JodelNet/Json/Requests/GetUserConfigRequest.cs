@@ -2,14 +2,14 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using JodelNet.Extensions;
-using JodelNet.Json.Models;
+using JodelNet.Json.RequestModels;
 using JodelNet.Json.Responses;
 
 namespace JodelNet.Json.Requests
 {
     public class GetUserConfigRequest : JodelRequestBase, IJodelRequest<GetUserConfigResponse>
     {
-        public GetUserConfigRequest(JodelUser user, HttpMethod method, string url, string version = "v2", string postData = "", bool authorize = true) : base(user, method, url, version, postData, authorize)
+        public GetUserConfigRequest(JodelUser user, HttpMethod method, string url, string version = "v2", string postData = "") : base(user, method, url, version, postData)
         {
         }
 
@@ -17,7 +17,7 @@ namespace JodelNet.Json.Requests
         {
             var plainResponse = await ExecuteRequestAsync(parameters, payload, postId);
 
-            return Deserialize<GetUserConfigResponse>(plainResponse);
+            return await Deserialize<GetUserConfigResponse>(plainResponse);
         }
     }
 }

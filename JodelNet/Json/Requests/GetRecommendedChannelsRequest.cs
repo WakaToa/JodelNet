@@ -2,7 +2,7 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using JodelNet.Extensions;
-using JodelNet.Json.Models;
+using JodelNet.Json.RequestModels;
 using JodelNet.Json.Responses;
 
 namespace JodelNet.Json.Requests
@@ -13,10 +13,10 @@ namespace JodelNet.Json.Requests
         {
             var plainResponse = await ExecuteRequestAsync(parameters, payload, postId);
 
-            return Deserialize<GetRecommendedChannelsResponse>(plainResponse);
+            return await Deserialize<GetRecommendedChannelsResponse>(plainResponse);
         }
 
-        public GetRecommendedChannelsRequest(JodelUser user, HttpMethod method, string url, string version = "v3", string postData = "", bool authorize = true) : base(user, method, url, version, postData, authorize)
+        public GetRecommendedChannelsRequest(JodelUser user, HttpMethod method, string url, string version = "v3", string postData = "") : base(user, method, url, version, postData)
         {
         }
     }

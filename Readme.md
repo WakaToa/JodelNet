@@ -34,20 +34,57 @@ await AndroidVerification.VerifyAccountAsync(jodelUser);
 
 ### Methods
 ```
-//Actions
+//Authentication
 CreateAccountAsync()
-FollowChannelAsync();
 RefreshAccessTokenAsync();
-SetLocationAsync();
 
-//Get
+//Verification
+PushTokenAsync();
+VerifyPushTokenAsync();
+
+//Get posts by location
 GetPostsRecentAsync();
 GetPostsPopularAsync();
 GetPostsDiscussedAsync();
-GetRecommendedChannelsAsync();
-GetPostDetailsAsync();
+GetPostsComboAsync();
+
+//Get posts by channel
+GetPostsChannelRecentAsync();
+GetPostsChannelPopularAsync();
+GetPostsChannelDiscussedAsync();
+GetPostsChannelComboAsync();
+
+//Get posts by hashtag
+GetPostsHashtagRecentAsync();
+GetPostsHashtagPopularAsync();
+GetPostsHashtagDiscussedAsync();
+GetPostsHashtagComboAsync();
+
+//Get own posts
+GetPostsOwnAsync();
+GetPostsOwnPopularAsync();
+GetPostsOwnDiscussedAsync();
+GetPostsOwnComboAsync();
+
+//User interaction
+SetLocationAsync();
+SetHomeTownAsync();
+DeleteUserHomeAsync();
 GetUserConfigAsync();
 
+//Post interaction (verified account needed)
+CreatePostAsync();
+DeletePostAsync();
+UpvotePostAsync();
+DownvotePostAsync();
+GiveThanksAsync();
+GetPostDetailsAsync();
+GetSharePostUrlAsync();
+
+//Channel interaction
+GetRecommendedChannelsAsync();
+FollowChannelAsync();
+FollowChannelsAsync();
 ```
 
 ----

@@ -4,10 +4,11 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using JodelNet.Extensions;
 using JodelNet.Http;
-using JodelNet.Json.Models;
+using JodelNet.Json.RequestModels;
 using JodelNet.Json.Responses;
 using Newtonsoft.Json;
 
@@ -25,22 +26,18 @@ namespace JodelNet.Json.Requests
 
         public string PostData { get; }
 
-        public bool Authorize { get; }
-
-        protected JodelRequestBase(JodelUser user, HttpMethod method, string url, string version = "v2", string postData = "", bool authorize = true)
+        protected JodelRequestBase(JodelUser user, HttpMethod method, string url, string version = "v2", string postData = "")
         {
             User = user;
             Method = method;
             Url = url;
             Version = version;
             PostData = postData;
-            Authorize = authorize;
         }
 
-        public async Task<string> ExecuteRequestAsync(List<Pair<string, string>> parameters = null, JodelRequest payload = null, string postId = null)
+        public async Task<HttpResponseMessage> ExecuteRequestAsync(List<Pair<string, string>> parameters = null, JodelRequest payload = null, string urlExtension = null)
         {
-            string plainJson = null;
-            string payloadString = payload != null
+            var payloadString = payload != null
                 ? JsonConvert.SerializeObject(payload, Formatting.None,
                     new JsonSerializerSettings
                     {
@@ -50,7 +47,7 @@ namespace JodelNet.Json.Requests
             var dt = DateTime.Now;
             var urlParam = Url;
 
-            if (!string.IsNullOrWhiteSpace(postId)) urlParam += postId;
+            if (!string.IsNullOrWhiteSpace(urlExtension)) urlParam += urlExtension;
             if (!string.IsNullOrWhiteSpace(PostData)) urlParam += PostData;
 
             if (parameters != null)
@@ -66,24 +63,13 @@ namespace JodelNet.Json.Requests
 
             try
             {
-                using (var client = JodelWebClient.Create(dt, stringifiedPayload, User.AccessToken, Method))
-                {
-                    if (Method == HttpMethod.Get)
-                    {
-                        plainJson = await client.DownloadStringTaskAsync(stringifiedUrl);
-                    }
-                    else
-                    {
-                        plainJson = await client.UploadStringTaskAsync(stringifiedUrl, Method.Method, payloadString ?? string.Empty);
-                    }
-                }
-
-                return plainJson;
+                var client = JodelHttpClient.Create(dt, stringifiedPayload, User.AccessToken, Method);
+                return await client.SendAsync(stringifiedUrl, Method, payloadString);
             }
             catch (WebException e)
             {
                 var s = new StreamReader(e.Response.GetResponseStream()).ReadToEnd();
-                return s;
+                return new HttpResponseMessage(HttpStatusCode.BadRequest);
             }
 
         }
@@ -111,6 +97,30 @@ namespace JodelNet.Json.Requests
 #pragma warning restore CS0168
             }
             return deserializedObject ?? (new T {Code = JodelResponseCodes.NULL_RESPONSE_ERROR});
+        }
+
+        protected static async Task<T> Deserialize<T>(HttpResponseMessage message) where T : JodelResponse, new()
+        {
+            switch ((int)message.StatusCode)
+            {
+                case 401:
+                    return new T(){Code = JodelResponseCodes.UNAUTHORIZED};
+                case 402:
+                    return new T() { Code = JodelResponseCodes.ACTION_NOT_ALLOWED };
+                case 403:
+                    return new T() { Code = JodelResponseCodes.ACCESS_DENIED };
+                case 429:
+                    return new T() { Code = JodelResponseCodes.TOO_MANY_REQUESTS };
+                case 477:
+                    return new T() { Code = JodelResponseCodes.SIGNED_REQUEST_EXPECTED };
+                case 478:
+                    return new T() { Code = JodelResponseCodes.ACCOUNT_NOT_VERIFIED };
+                case 502:
+                    return new T() { Code = JodelResponseCodes.BAD_GATEWAY };
+            }
+            var messageContent = await message.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+            return Deserialize<T>(messageContent);
         }
     }
 }
