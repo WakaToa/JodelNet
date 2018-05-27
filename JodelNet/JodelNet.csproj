@@ -103,6 +103,7 @@
     <Compile Include="Json\Responses\GetUserStatsResponse.cs" />
     <Compile Include="Json\Responses\VerifyInstanceIdResponse.cs" />
     <Compile Include="Json\Responses\VotePostResponse.cs" />
+    <Compile Include="Json\Responses\PinPostResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
