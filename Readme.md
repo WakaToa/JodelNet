@@ -25,7 +25,7 @@ Create the account.
 await jodelUser.CreateAccountAsync();
 ```
 
-To perform all actions (like voting and posting/creating new content), you need to verify your account using Google Cloud Messaging (GCM)
+To perform all actions (like voting and posting/creating new content), you need to verify your account using Google Cloud Messaging (GCM) or Firebase
 ```
 await AndroidVerification.VerifyAccountAsync(jodelUser);
 //It seems like trying to verify with a fresh/unused ip address works better than a "used" one
@@ -45,6 +45,7 @@ RefreshAccessTokenAsync();
 //Verification
 PushTokenAsync();
 VerifyPushTokenAsync();
+VerifyInstanceIdAsync();
 
 //Get posts by location
 GetPostsRecentAsync();
@@ -69,6 +70,9 @@ GetPostsOwnAsync();
 GetPostsOwnPopularAsync();
 GetPostsOwnDiscussedAsync();
 GetPostsOwnComboAsync();
+GetPostsPinnedAsync();
+GetPostsRepliedAsync();
+GetPostsVotedAsync()
 
 //User interaction
 SetLocationAsync();
@@ -77,14 +81,16 @@ DeleteUserHomeAsync();
 GetUserConfigAsync();
 GetUserStatsAsync();
 
-//Post interaction (verified account needed)
-CreatePostAsync();
-DeletePostAsync();
-UpvotePostAsync();
-DownvotePostAsync();
-GiveThanksAsync();
+//Post interaction
+CreatePostAsync(); //verified account needed
+DeletePostAsync(); //verified account needed
+UpvotePostAsync(); //verified account needed
+DownvotePostAsync(); //verified account needed
+GiveThanksAsync(); //verified account needed
 GetPostDetailsAsync();
 GetSharePostUrlAsync();
+PinPostAsync();
+UnpinPostAsync();
 
 //Channel interaction
 GetRecommendedChannelsAsync();

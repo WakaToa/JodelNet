@@ -60,16 +60,16 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="Extensions\Pair.cs" />
-    <Compile Include="GCM\AndroidVerification.cs" />
-    <Compile Include="GCM\VerificationResult.cs" />
-    <Compile Include="GCM\InstanceIdVerification.cs" />
-    <Compile Include="GCM\Proto\MCSToken.cs" />
-    <Compile Include="GCM\Extensions\SslStreamExtensions.cs" />
-    <Compile Include="GCM\Proto\CheckinPB2.cs" />
-    <Compile Include="GCM\Proto\MCSPB2.cs" />
-    <Compile Include="GCM\Proto\ProtoResponseMessage.cs" />
-    <Compile Include="GCM\Stream\McsInputStream.cs" />
-    <Compile Include="GCM\Stream\McsOutputStream.cs" />
+    <Compile Include="Verification\AndroidVerification.cs" />
+    <Compile Include="Verification\VerificationResult.cs" />
+    <Compile Include="Verification\InstanceIdVerification.cs" />
+    <Compile Include="Verification\Proto\MCSToken.cs" />
+    <Compile Include="Verification\Extensions\SslStreamExtensions.cs" />
+    <Compile Include="Verification\Proto\CheckinPB2.cs" />
+    <Compile Include="Verification\Proto\MCSPB2.cs" />
+    <Compile Include="Verification\Proto\ProtoResponseMessage.cs" />
+    <Compile Include="Verification\Stream\McsInputStream.cs" />
+    <Compile Include="Verification\Stream\McsOutputStream.cs" />
     <Compile Include="Http\JodelHttpClient.cs" />
     <Compile Include="Http\JodelRequestFactory.cs" />
     <Compile Include="JodelUser.cs" />

@@ -400,6 +400,60 @@ namespace JodelNet
             var result = await RequestFactory.GetPostsOwnCombinedRequestFactory().PerformActionAsync(prm);
             return result;
         }
+
+        public async Task<GetPostsResponse> GetPostsPinnedAsync(bool home = false, int limit = 60, int skip = 0)
+        {
+            var prm = new List<Pair<string, string>>
+            {
+                new Pair<string, string>("lat", Location.LocationCoordinates.Latitude.ToString()),
+                new Pair<string, string>("lng", Location.LocationCoordinates.Longitude.ToString()),
+                new Pair<string, string>("stickies", "false"),
+                new Pair<string, string>("home", home.ToString()),
+                new Pair<string, string>("channel", ""),
+                new Pair<string, string>("limit", limit.ToString()),
+                new Pair<string, string>("hashtag", ""),
+                new Pair<string, string>("skip", skip.ToString())
+            };
+
+            var result = await RequestFactory.GetPostsPinnedRequestFactory().PerformActionAsync(prm);
+            return result;
+        }
+
+        public async Task<GetPostsResponse> GetPostsRepliedAsync(bool home = false, int limit = 60, int skip = 0)
+        {
+            var prm = new List<Pair<string, string>>
+            {
+                new Pair<string, string>("lat", Location.LocationCoordinates.Latitude.ToString()),
+                new Pair<string, string>("lng", Location.LocationCoordinates.Longitude.ToString()),
+                new Pair<string, string>("stickies", "false"),
+                new Pair<string, string>("home", home.ToString()),
+                new Pair<string, string>("channel", ""),
+                new Pair<string, string>("limit", limit.ToString()),
+                new Pair<string, string>("hashtag", ""),
+                new Pair<string, string>("skip", skip.ToString())
+            };
+
+            var result = await RequestFactory.GetPostsRepliedRequestFactory().PerformActionAsync(prm);
+            return result;
+        }
+
+        public async Task<GetPostsResponse> GetPostsVotedAsync(bool home = false, int limit = 60, int skip = 0)
+        {
+            var prm = new List<Pair<string, string>>
+            {
+                new Pair<string, string>("lat", Location.LocationCoordinates.Latitude.ToString()),
+                new Pair<string, string>("lng", Location.LocationCoordinates.Longitude.ToString()),
+                new Pair<string, string>("stickies", "false"),
+                new Pair<string, string>("home", home.ToString()),
+                new Pair<string, string>("channel", ""),
+                new Pair<string, string>("limit", limit.ToString()),
+                new Pair<string, string>("hashtag", ""),
+                new Pair<string, string>("skip", skip.ToString())
+            };
+
+            var result = await RequestFactory.GetPostsVotedRequestFactory().PerformActionAsync(prm);
+            return result;
+        }
         #endregion
 
         #region User interaction
@@ -494,6 +548,28 @@ namespace JodelNet
         public async Task<GetSharePostUrlResponse> GetSharePostUrlAsync(string postId)
         {
             var result = await RequestFactory.GetSharePostUrlRequestFactory().PerformActionAsync(urlExtension: postId + "/share");
+            return result;
+        }
+
+        public async Task<PinPostResponse> PinPostAsync(string postId)
+        {
+            var prm = new List<Pair<string, string>>
+            {
+                new Pair<string, string>("postId", postId),
+            };
+
+            var result = await RequestFactory.PinPostRequestFactory().PerformActionAsync(prm, null, postId + "/pin");
+            return result;
+        }
+
+        public async Task<PinPostResponse> UnpinPostAsync(string postId)
+        {
+            var prm = new List<Pair<string, string>>
+            {
+                new Pair<string, string>("postId", postId),
+            };
+
+            var result = await RequestFactory.PinPostRequestFactory().PerformActionAsync(prm, null, postId + "/unpin");
             return result;
         }
         #endregion

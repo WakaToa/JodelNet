@@ -319,6 +319,48 @@ namespace JodelNet.Http
                 return _getPostsOwnCombinedRequestFactory;
             }
         }
+
+        private Func<IJodelRequest<GetPostsResponse>> _getPostsPinnedRequestFactory;
+        public Func<IJodelRequest<GetPostsResponse>> GetPostsPinnedRequestFactory
+        {
+            get
+            {
+                if (_getPostsPinnedRequestFactory == null)
+                {
+                    var request = new SimplifiedRequest<GetPostsResponse>(User, HttpMethod.Get, "/posts/mine/pinned/", "v2");
+                    _getPostsPinnedRequestFactory = (_getPostsPinnedRequestFactory = () => request);
+                }
+                return _getPostsPinnedRequestFactory;
+            }
+        }
+
+        private Func<IJodelRequest<GetPostsResponse>> _getPostsRepliedRequestFactory;
+        public Func<IJodelRequest<GetPostsResponse>> GetPostsRepliedRequestFactory
+        {
+            get
+            {
+                if (_getPostsRepliedRequestFactory == null)
+                {
+                    var request = new SimplifiedRequest<GetPostsResponse>(User, HttpMethod.Get, "/posts/mine/replies/", "v2");
+                    _getPostsRepliedRequestFactory = (_getPostsRepliedRequestFactory = () => request);
+                }
+                return _getPostsRepliedRequestFactory;
+            }
+        }
+
+        private Func<IJodelRequest<GetPostsResponse>> _getPostsVotedRequestFactory;
+        public Func<IJodelRequest<GetPostsResponse>> GetPostsVotedRequestFactory
+        {
+            get
+            {
+                if (_getPostsVotedRequestFactory == null)
+                {
+                    var request = new SimplifiedRequest<GetPostsResponse>(User, HttpMethod.Get, "/posts/mine/votes/", "v2");
+                    _getPostsVotedRequestFactory = (_getPostsVotedRequestFactory = () => request);
+                }
+                return _getPostsVotedRequestFactory;
+            }
+        }
         #endregion
 
         #region User interactions
@@ -478,6 +520,19 @@ namespace JodelNet.Http
             }
         }
 
+        private Func<IJodelRequest<PinPostResponse>> _pinPostRequestFactory;
+        public Func<IJodelRequest<PinPostResponse>> PinPostRequestFactory
+        {
+            get
+            {
+                if (_pinPostRequestFactory == null)
+                {
+                    var request = new SimplifiedRequest<PinPostResponse>(User, HttpMethod.Put, "/posts/", "v2");
+                    _pinPostRequestFactory = (_pinPostRequestFactory = () => request);
+                }
+                return _pinPostRequestFactory;
+            }
+        }
         #endregion
 
         #region Channel interactions
