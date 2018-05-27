@@ -2,8 +2,7 @@
 JodelNet is an inofficial interface to the private Jodel App API. Not affiliated with *The Jodel Venture GmbH*.
 
 ----
-
-## Read before start ![Educational_purpose only](https://img.shields.io/badge/Educational_purpose-only-brightgreen.svg)
+## Read before start ![For Educational Purposes Only](https://img.shields.io/badge/For_Educational_Purposes-only-brightgreen.svg)
 **This repository was created for educational purposes only.**
 
 ----
