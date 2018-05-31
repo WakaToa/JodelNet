@@ -13,7 +13,7 @@ namespace JodelNet
 {
     public class JodelUser
     {
-        public LocationJson Location { get; set; }
+        public SimpleLocation Location { get; set; }
         public string DeviceUid { get; set; }
         public string AccessToken { get; set; }
         public string RefreshToken { get; set; }
@@ -32,21 +32,21 @@ namespace JodelNet
         public JodelRequestFactory RequestFactory { get; set; }
 
         #region Constructor
-        public JodelUser(LocationJson loc, string deviceUiD, string accessToken, string refreshToken, string distinctId) : this(loc, deviceUiD)
+        public JodelUser(SimpleLocation loc, string deviceUiD, string accessToken, string refreshToken, string distinctId) : this(loc, deviceUiD)
         {
             RefreshToken = refreshToken;
             AccessToken = accessToken;
             DistinctId = distinctId;
         }
 
-        public JodelUser(LocationJson loc, string deviceUiD)
+        public JodelUser(SimpleLocation loc, string deviceUiD)
         {
             Location = loc;
             DeviceUid = deviceUiD;
             RequestFactory = new JodelRequestFactory(this);
         }
 
-        public JodelUser(LocationJson loc) : this(loc, AndroidVerification.GetRandomDeviceUid()){}
+        public JodelUser(SimpleLocation loc) : this(loc, AndroidVerification.GetRandomDeviceUid()){}
 
         public JodelUser(){}
 
@@ -61,7 +61,7 @@ namespace JodelNet
             {
                 DeviceUid = DeviceUid,
                 ClientId = Constants.CLIENT_ID,
-                Location = Location
+                Location = Location.ToJsonModel()
             };
             var result = await RequestFactory.CreateAccountRequestFactory().PerformActionAsync(payload: rq);
             if (string.IsNullOrEmpty(result.AccessToken))
@@ -111,8 +111,8 @@ namespace JodelNet
         {
             var prm = new List<Pair<string, string>>
             {
-                new Pair<string, string>("lat", Location.LocationCoordinates.Latitude.ToString()),
-                new Pair<string, string>("lng", Location.LocationCoordinates.Longitude.ToString()),
+                new Pair<string, string>("lat", Location.Latitude.ToString()),
+                new Pair<string, string>("lng", Location.Longitude.ToString()),
                 new Pair<string, string>("stickies", "false"),
                 new Pair<string, string>("home", home.ToString()),
                 new Pair<string, string>("channel", ""),
@@ -129,8 +129,8 @@ namespace JodelNet
         {
             var prm = new List<Pair<string, string>>
             {
-                new Pair<string, string>("lat", Location.LocationCoordinates.Latitude.ToString()),
-                new Pair<string, string>("lng", Location.LocationCoordinates.Longitude.ToString()),
+                new Pair<string, string>("lat", Location.Latitude.ToString()),
+                new Pair<string, string>("lng", Location.Longitude.ToString()),
                 new Pair<string, string>("stickies", "false"),
                 new Pair<string, string>("home", home.ToString()),
                 new Pair<string, string>("channel", ""),
@@ -147,8 +147,8 @@ namespace JodelNet
         {
             var prm = new List<Pair<string, string>>
             {
-                new Pair<string, string>("lat", Location.LocationCoordinates.Latitude.ToString()),
-                new Pair<string, string>("lng", Location.LocationCoordinates.Longitude.ToString()),
+                new Pair<string, string>("lat", Location.Latitude.ToString()),
+                new Pair<string, string>("lng", Location.Longitude.ToString()),
                 new Pair<string, string>("stickies", "false"),
                 new Pair<string, string>("home", home.ToString()),
                 new Pair<string, string>("channel", ""),
@@ -165,8 +165,8 @@ namespace JodelNet
         {
             var prm = new List<Pair<string, string>>
             {
-                new Pair<string, string>("lat", Location.LocationCoordinates.Latitude.ToString()),
-                new Pair<string, string>("lng", Location.LocationCoordinates.Longitude.ToString()),
+                new Pair<string, string>("lat", Location.Latitude.ToString()),
+                new Pair<string, string>("lng", Location.Longitude.ToString()),
                 new Pair<string, string>("stickies", "false"),
                 new Pair<string, string>("home", home.ToString()),
                 new Pair<string, string>("channel", ""),
@@ -185,8 +185,8 @@ namespace JodelNet
         {
             var prm = new List<Pair<string, string>>
             {
-                new Pair<string, string>("lat", Location.LocationCoordinates.Latitude.ToString()),
-                new Pair<string, string>("lng", Location.LocationCoordinates.Longitude.ToString()),
+                new Pair<string, string>("lat", Location.Latitude.ToString()),
+                new Pair<string, string>("lng", Location.Longitude.ToString()),
                 new Pair<string, string>("stickies", "false"),
                 new Pair<string, string>("home", home.ToString()),
                 new Pair<string, string>("channel", channel),
@@ -203,8 +203,8 @@ namespace JodelNet
         {
             var prm = new List<Pair<string, string>>
             {
-                new Pair<string, string>("lat", Location.LocationCoordinates.Latitude.ToString()),
-                new Pair<string, string>("lng", Location.LocationCoordinates.Longitude.ToString()),
+                new Pair<string, string>("lat", Location.Latitude.ToString()),
+                new Pair<string, string>("lng", Location.Longitude.ToString()),
                 new Pair<string, string>("stickies", "false"),
                 new Pair<string, string>("home", home.ToString()),
                 new Pair<string, string>("channel", channel),
@@ -221,8 +221,8 @@ namespace JodelNet
         {
             var prm = new List<Pair<string, string>>
             {
-                new Pair<string, string>("lat", Location.LocationCoordinates.Latitude.ToString()),
-                new Pair<string, string>("lng", Location.LocationCoordinates.Longitude.ToString()),
+                new Pair<string, string>("lat", Location.Latitude.ToString()),
+                new Pair<string, string>("lng", Location.Longitude.ToString()),
                 new Pair<string, string>("stickies", "false"),
                 new Pair<string, string>("home", home.ToString()),
                 new Pair<string, string>("channel", channel),
@@ -239,8 +239,8 @@ namespace JodelNet
         {
             var prm = new List<Pair<string, string>>
             {
-                new Pair<string, string>("lat", Location.LocationCoordinates.Latitude.ToString()),
-                new Pair<string, string>("lng", Location.LocationCoordinates.Longitude.ToString()),
+                new Pair<string, string>("lat", Location.Latitude.ToString()),
+                new Pair<string, string>("lng", Location.Longitude.ToString()),
                 new Pair<string, string>("stickies", "false"),
                 new Pair<string, string>("home", home.ToString()),
                 new Pair<string, string>("channel", channel),
@@ -259,8 +259,8 @@ namespace JodelNet
         {
             var prm = new List<Pair<string, string>>
             {
-                new Pair<string, string>("lat", Location.LocationCoordinates.Latitude.ToString()),
-                new Pair<string, string>("lng", Location.LocationCoordinates.Longitude.ToString()),
+                new Pair<string, string>("lat", Location.Latitude.ToString()),
+                new Pair<string, string>("lng", Location.Longitude.ToString()),
                 new Pair<string, string>("stickies", "false"),
                 new Pair<string, string>("home", home.ToString()),
                 new Pair<string, string>("channel", ""),
@@ -277,8 +277,8 @@ namespace JodelNet
         {
             var prm = new List<Pair<string, string>>
             {
-                new Pair<string, string>("lat", Location.LocationCoordinates.Latitude.ToString()),
-                new Pair<string, string>("lng", Location.LocationCoordinates.Longitude.ToString()),
+                new Pair<string, string>("lat", Location.Latitude.ToString()),
+                new Pair<string, string>("lng", Location.Longitude.ToString()),
                 new Pair<string, string>("stickies", "false"),
                 new Pair<string, string>("home", home.ToString()),
                 new Pair<string, string>("channel", ""),
@@ -295,8 +295,8 @@ namespace JodelNet
         {
             var prm = new List<Pair<string, string>>
             {
-                new Pair<string, string>("lat", Location.LocationCoordinates.Latitude.ToString()),
-                new Pair<string, string>("lng", Location.LocationCoordinates.Longitude.ToString()),
+                new Pair<string, string>("lat", Location.Latitude.ToString()),
+                new Pair<string, string>("lng", Location.Longitude.ToString()),
                 new Pair<string, string>("stickies", "false"),
                 new Pair<string, string>("home", home.ToString()),
                 new Pair<string, string>("channel", ""),
@@ -313,8 +313,8 @@ namespace JodelNet
         {
             var prm = new List<Pair<string, string>>
             {
-                new Pair<string, string>("lat", Location.LocationCoordinates.Latitude.ToString()),
-                new Pair<string, string>("lng", Location.LocationCoordinates.Longitude.ToString()),
+                new Pair<string, string>("lat", Location.Latitude.ToString()),
+                new Pair<string, string>("lng", Location.Longitude.ToString()),
                 new Pair<string, string>("stickies", "false"),
                 new Pair<string, string>("home", home.ToString()),
                 new Pair<string, string>("channel", ""),
@@ -333,8 +333,8 @@ namespace JodelNet
         {
             var prm = new List<Pair<string, string>>
             {
-                new Pair<string, string>("lat", Location.LocationCoordinates.Latitude.ToString()),
-                new Pair<string, string>("lng", Location.LocationCoordinates.Longitude.ToString()),
+                new Pair<string, string>("lat", Location.Latitude.ToString()),
+                new Pair<string, string>("lng", Location.Longitude.ToString()),
                 new Pair<string, string>("stickies", "false"),
                 new Pair<string, string>("home", home.ToString()),
                 new Pair<string, string>("channel", ""),
@@ -351,8 +351,8 @@ namespace JodelNet
         {
             var prm = new List<Pair<string, string>>
             {
-                new Pair<string, string>("lat", Location.LocationCoordinates.Latitude.ToString()),
-                new Pair<string, string>("lng", Location.LocationCoordinates.Longitude.ToString()),
+                new Pair<string, string>("lat", Location.Latitude.ToString()),
+                new Pair<string, string>("lng", Location.Longitude.ToString()),
                 new Pair<string, string>("stickies", "false"),
                 new Pair<string, string>("home", home.ToString()),
                 new Pair<string, string>("channel", ""),
@@ -369,8 +369,8 @@ namespace JodelNet
         {
             var prm = new List<Pair<string, string>>
             {
-                new Pair<string, string>("lat", Location.LocationCoordinates.Latitude.ToString()),
-                new Pair<string, string>("lng", Location.LocationCoordinates.Longitude.ToString()),
+                new Pair<string, string>("lat", Location.Latitude.ToString()),
+                new Pair<string, string>("lng", Location.Longitude.ToString()),
                 new Pair<string, string>("stickies", "false"),
                 new Pair<string, string>("home", home.ToString()),
                 new Pair<string, string>("channel", ""),
@@ -387,8 +387,8 @@ namespace JodelNet
         {
             var prm = new List<Pair<string, string>>
             {
-                new Pair<string, string>("lat", Location.LocationCoordinates.Latitude.ToString()),
-                new Pair<string, string>("lng", Location.LocationCoordinates.Longitude.ToString()),
+                new Pair<string, string>("lat", Location.Latitude.ToString()),
+                new Pair<string, string>("lng", Location.Longitude.ToString()),
                 new Pair<string, string>("stickies", "false"),
                 new Pair<string, string>("home", home.ToString()),
                 new Pair<string, string>("channel", ""),
@@ -405,8 +405,8 @@ namespace JodelNet
         {
             var prm = new List<Pair<string, string>>
             {
-                new Pair<string, string>("lat", Location.LocationCoordinates.Latitude.ToString()),
-                new Pair<string, string>("lng", Location.LocationCoordinates.Longitude.ToString()),
+                new Pair<string, string>("lat", Location.Latitude.ToString()),
+                new Pair<string, string>("lng", Location.Longitude.ToString()),
                 new Pair<string, string>("stickies", "false"),
                 new Pair<string, string>("home", home.ToString()),
                 new Pair<string, string>("channel", ""),
@@ -423,8 +423,8 @@ namespace JodelNet
         {
             var prm = new List<Pair<string, string>>
             {
-                new Pair<string, string>("lat", Location.LocationCoordinates.Latitude.ToString()),
-                new Pair<string, string>("lng", Location.LocationCoordinates.Longitude.ToString()),
+                new Pair<string, string>("lat", Location.Latitude.ToString()),
+                new Pair<string, string>("lng", Location.Longitude.ToString()),
                 new Pair<string, string>("stickies", "false"),
                 new Pair<string, string>("home", home.ToString()),
                 new Pair<string, string>("channel", ""),
@@ -441,8 +441,8 @@ namespace JodelNet
         {
             var prm = new List<Pair<string, string>>
             {
-                new Pair<string, string>("lat", Location.LocationCoordinates.Latitude.ToString()),
-                new Pair<string, string>("lng", Location.LocationCoordinates.Longitude.ToString()),
+                new Pair<string, string>("lat", Location.Latitude.ToString()),
+                new Pair<string, string>("lng", Location.Longitude.ToString()),
                 new Pair<string, string>("stickies", "false"),
                 new Pair<string, string>("home", home.ToString()),
                 new Pair<string, string>("channel", ""),
@@ -457,10 +457,10 @@ namespace JodelNet
         #endregion
 
         #region User interaction
-        public async Task<bool> SetLocationAsync(LocationJson loc)
+        public async Task<bool> SetLocationAsync(SimpleLocation loc)
         {
             Location = loc;
-            var result = await RequestFactory.SetLocationRequestFactory().PerformActionAsync(payload: new SetLocationJson() { Location = loc });
+            var result = await RequestFactory.SetLocationRequestFactory().PerformActionAsync(payload: new SetLocationJson() { Location = loc.ToJsonModel() });
             return result;
         }
 
@@ -492,7 +492,7 @@ namespace JodelNet
         {
             var pl = new CreatePostJson
             {
-                Location = Location,
+                Location = Location.ToJsonModel(),
                 Ancestor = postId,
                 B64Image = image,
                 Channel = channel,

@@ -60,6 +60,8 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="Extensions\Pair.cs" />
+    <Compile Include="Json\Responses\OpenStreetMapResponse.cs" />
+    <Compile Include="Json\Responses\PinPostResponse.cs" />
     <Compile Include="Verification\AndroidVerification.cs" />
     <Compile Include="Verification\VerificationResult.cs" />
     <Compile Include="Verification\InstanceIdVerification.cs" />
